@@ -9,15 +9,15 @@ It runs on [jointJS](http://www.jointjs.com/). It exports to JSON with game read
 
 ##Nodes
 ###Text
-Display a message from the specified actor
-Actor: Specify the actor who will say the speech.
-Speech: The text the actor will say.
+Display a message from the specified actor.  
+Actor: Specify the actor who will say the speech.  
+Speech: The text the actor will say.  
 
 ###Choice
-Intended to populate the players choices for responses.
+Intended to populate the players choices for responses.  
 Title: The title of the choice. This is useful for cases when the buttons the player would have to chose from
-will differ from the actual speech he will say. 
-Speech: The text the actor will say.
+will differ from the actual speech he will say.   
+Speech: The text the actor will say.  
 
 ### Set
 Sets a variable to a value. Can link to one Text, Node, Set, or Branch.
@@ -29,10 +29,8 @@ Takes one of several paths based on the value of a variable. Each port can link 
 Does nothing. Can link to one Text, Node, Set, or Branch, or to one or more Choices.
 
 ##Usage
-Fire up the HTML, make your dialog and export. 
-
-You can add ?load="file.json" to the URL to load a graph saved on cache.
-
+Fire up the HTML, make your dialog and export.  
+You can add ?load="file.json" to the URL to load a graph saved on cache.  
 Example Output:
 ```javascript
 [

@@ -987,6 +987,7 @@ function addFileEntry(name)
 $('#menu button.close').click(function()
 {
 	$('#menu').hide();
+	panning = false;
 });
 
 $(window).trigger('resize');

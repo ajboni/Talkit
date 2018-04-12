@@ -12,7 +12,6 @@ var importOnStart = getURLParameter('import');
 
 addEventListener('app-ready', function(e)
 {
-	// We're running inside app.js
 	fs = require('fs');
 	$('#import').hide();
 	$('#export').hide();
@@ -21,7 +20,6 @@ addEventListener('app-ready', function(e)
 
 var graph = new joint.dia.Graph();
 
-//#region DefaultLinks
 var defaultLink = new joint.dia.Link(
 {
 	attrs:
@@ -60,9 +58,6 @@ var allowableConnections =
 	['dialogue.Branch', 'dialogue.Branch'],
 ];
 
-
-//#endregion
-
 function validateConnection(cellViewS, magnetS, cellViewT, magnetT, end, linkView)
 {
 	// Prevent loop linking
@@ -71,8 +66,9 @@ function validateConnection(cellViewS, magnetS, cellViewT, magnetT, end, linkVie
 
 	if (cellViewS == cellViewT)
 		return false;
-
-	if (magnetT.attributes.magnet.nodeValue !== 'passive') // Can't connect to an output port
+	
+	// Can't connect to an output port
+	if (magnetT.attributes.magnet.nodeValue !== 'passive') 
 		return false;
 
 	var sourceType = cellViewS.model.attributes.type;
@@ -89,21 +85,6 @@ function validateConnection(cellViewS, magnetS, cellViewT, magnetT, end, linkVie
 	}
 	if (!valid)
 		return false;
-
-    //COMENTED UNTIL I FIGURE WHY IT "DANCES" WHEN SNAPPIN
-	//var links = graph.getConnectedLinks(cellViewS.model);
-	//for (var i = 0; i < links.length; i++)
-	//{
-	//	var link = links[i];
-	//	if (link.attributes.source.id === cellViewS.model.id && link.attributes.source.port === magnetS.attributes.port.nodeValue && link.attributes.target.id)
-	//	{
-	//		var targetCell = graph.getCell(link.attributes.target.id);
-	//		if (targetCell.attributes.type !== targetType)
-	//			return false; // We can only connect to multiple targets of the same type
-	//		if (targetCell == cellViewT.model)
-	//			return false; // Already connected
-	//	} 
-	//}
 
 	return true;
 }
@@ -127,7 +108,8 @@ function validateMagnet(cellView, magnet)
 			{
 				var targetCell = graph.getCell(link.attributes.target.id);
 				if (unlimitedConnections.indexOf(targetCell.attributes.type) !== -1)
-					return true; // It's okay because this target type has unlimited connections
+					// It's okay because this target type has unlimited connections
+					return true; 
 			} 
 			return false;
 		}
@@ -138,7 +120,6 @@ function validateMagnet(cellView, magnet)
 
 joint.shapes.dialogue = {};
 
-//#region Dialog.BASE
 joint.shapes.dialogue.Base = joint.shapes.devs.Model.extend(
 {
 	defaults: joint.util.deepSupplement
@@ -158,9 +139,6 @@ joint.shapes.dialogue.Base = joint.shapes.devs.Model.extend(
 		joint.shapes.devs.Model.prototype.defaults
 	),
 });
-//#endregion
-
-//#region BaseView
 joint.shapes.dialogue.BaseView = joint.shapes.devs.ModelView.extend(
 {
 	template:
@@ -169,7 +147,6 @@ joint.shapes.dialogue.BaseView = joint.shapes.devs.ModelView.extend(
 		'<span class="label"></span>',
 		'<button class="delete">x</button>',
         '<input type="actor" class="actor" placeholder="Actor" />',
-		//'<input type="text" class="name" placeholder="Text" />',
         '<p> <textarea type="text" class="name" rows="4" cols="27" placeholder="Speech"></textarea></p>',
         '</div>',
 	].join(''),
@@ -243,13 +220,10 @@ joint.shapes.dialogue.BaseView = joint.shapes.devs.ModelView.extend(
 		if (!textAreaField.is(':focus'))
 		    textAreaField.val(this.model.get('name'));
 
-
-
 		var label = this.$box.find('.label');
 		var type = this.model.get('type').slice('dialogue.'.length);
 		label.text(type);
 		label.attr('class', 'label ' + type);
-	    //this.$box.css({ width: bbox.width, height: bbox.height, left: bbox.x, top: bbox.y, transform: 'rotate(' + (this.model.get('angle') || 0) + 'deg)' });
 		this.$box.css({ width: bbox.width, height: bbox.height, left: bbox.x, top: bbox.y, transform: 'rotate(' + (this.model.get('angle') || 0) + 'deg)' });
 	},
 
@@ -259,9 +233,7 @@ joint.shapes.dialogue.BaseView = joint.shapes.devs.ModelView.extend(
 	},
 });
 
-//#endregion
 
-//#region ChoiceView
 joint.shapes.dialogue.ChoiceView = joint.shapes.devs.ModelView.extend(
 {
     template:
@@ -341,9 +313,7 @@ joint.shapes.dialogue.ChoiceView = joint.shapes.devs.ModelView.extend(
     },
 });
 
-//#endregion
 
-//#region Dialoge.Node
 joint.shapes.dialogue.Node = joint.shapes.devs.Model.extend(
 {
 	defaults: joint.util.deepSupplement
@@ -360,12 +330,8 @@ joint.shapes.dialogue.Node = joint.shapes.devs.Model.extend(
 		joint.shapes.dialogue.Base.prototype.defaults
 	),
 });
-
 joint.shapes.dialogue.NodeView = joint.shapes.dialogue.BaseView;
 
-//#endregion
-
-//#region dialogue.TEXT
 joint.shapes.dialogue.Text = joint.shapes.devs.Model.extend(
 {
 	defaults: joint.util.deepSupplement
@@ -385,12 +351,9 @@ joint.shapes.dialogue.Text = joint.shapes.devs.Model.extend(
 		joint.shapes.dialogue.Base.prototype.defaults
 	),
 });
-
 joint.shapes.dialogue.TextView = joint.shapes.dialogue.BaseView;
 
-//#endregion
 
-//#region dialogue.Choice
 joint.shapes.dialogue.Choice = joint.shapes.devs.Model.extend(
 {
 	defaults: joint.util.deepSupplement
@@ -406,12 +369,9 @@ joint.shapes.dialogue.Choice = joint.shapes.devs.Model.extend(
 		joint.shapes.dialogue.Base.prototype.defaults
 	),
 });
-
 joint.shapes.dialogue.ChoiceView = joint.shapes.dialogue.ChoiceView;
 
-//#endregion
 
-//#region dialogue.Branch
 joint.shapes.dialogue.Branch = joint.shapes.devs.Model.extend(
 {
 	defaults: joint.util.deepSupplement
@@ -519,9 +479,7 @@ joint.shapes.dialogue.BranchView = joint.shapes.dialogue.BaseView.extend(
 	},
 });
 
-//#endregion
 
-//#region dialogue.SET
 joint.shapes.dialogue.Set = joint.shapes.devs.Model.extend(
 {
 	defaults: joint.util.deepSupplement
@@ -536,7 +494,6 @@ joint.shapes.dialogue.Set = joint.shapes.devs.Model.extend(
 		joint.shapes.dialogue.Base.prototype.defaults
 	),
 });
-
 joint.shapes.dialogue.SetView = joint.shapes.dialogue.BaseView.extend(
 {
 	template:
@@ -566,8 +523,6 @@ joint.shapes.dialogue.SetView = joint.shapes.dialogue.BaseView.extend(
 			field.val(this.model.get('value'));
 	},
 });
-
-//#endregion 
 
 function gameData()
 {
@@ -662,12 +617,8 @@ function gameData()
 }
 
 
-// Menu actions
-
 var filename = null;
 var defaultFilename = 'dialogue.json';
-
-
 
 function flash(text)
 {
@@ -751,7 +702,6 @@ function doSave()
 function load()
 {
     if (fs) {
-        /// AUTOLOAD
         window.frame.openDialog(
 		{
 		    type: 'open',
@@ -820,8 +770,6 @@ function clear()
 	filename = null;
 }
 
-// Browser stuff
-
 var paper = new joint.dia.Paper(
 {
 	el: $('#paper'),
@@ -832,7 +780,6 @@ var paper = new joint.dia.Paper(
 	defaultLink: defaultLink,
 	validateConnection: validateConnection,
 	validateMagnet: validateMagnet,
-	// Enable link snapping within 75px lookup radius
 	snapLinks: { radius: 75 }
 
 });
@@ -1012,16 +959,11 @@ $('#paper').contextmenu(
 	]
 });
 
-
-
-
 ///AUTOLOAD IF URL HAS ? WILDCARD
-
 if (loadOnStart != null) {
     loadOnStart += '.json';
     console.log(loadOnStart);
     graph.clear();
     filename = loadOnStart;
     graph.fromJSON(JSON.parse(localStorage[loadOnStart]));
-    //graph.fromJSON(JSON.parse(fs.readFileSync(filename, 'utf8')));
 }

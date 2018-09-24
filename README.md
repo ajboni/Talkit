@@ -1,6 +1,12 @@
+# Hello! I'm currently working on a similar but more powerfull app which supports multiple dialogues with built in scripting, gdds, quest, etc. 
+# https://pointbleepstudios.com/speechr/
+
+---
+
 # Talkit
 Web Based, Non-Linear Game Dialogue Editor.
 #
+
 Talkit is a fork of [et1337's](https://github.com/et1337) wonderful [The Poor Man's Dialogue Tree](http://et1337.com/2014/05/16/the-poor-mans-dialogue-tree/) which is currently part of [Lemma](https://github.com/et1337/Lemma) project.
 ##Description.
 Talkit is a Non-linear, node based, game dialog editor. 

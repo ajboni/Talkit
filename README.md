@@ -1,5 +1,5 @@
 # Hello! I'm currently working on a similar but more powerfull app which supports multiple dialogues with built in scripting, gdds, quest, etc. 
-# https://pointbleepstudios.com/speechr/
+# https://speechr.aboni.dev/
 
 ---
 

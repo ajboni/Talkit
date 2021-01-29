@@ -10,7 +10,7 @@ Web Based, Non-Linear Game Dialogue Editor.
 
 #
 
-Talkit is a fork of [et1337's](https://github.com/et1337) wonderful [The Poor Man's Dialogue Tree](https://etodd.io/2014/05/16/the-poor-mans-dialogue-tree/) which is currently part of [Lemma](https://github.com/et1337/Lemma) project.
+Talkit is a fork of [etodd's](https://github.com/etodd) wonderful [The Poor Man's Dialogue Tree](https://etodd.io/2014/05/16/the-poor-mans-dialogue-tree/) which is currently part of [Lemma](https://github.com/etodd/Lemma) project.
 
 ## Description
 

@@ -1,6 +1,6 @@
-# Hello! I'm currently working on a similar but more powerfull app which supports multiple dialogues with built in scripting, gdds, quest, etc.
+## Hello! I'm currently working on a similar but more powerfull app which supports multiple dialogues with built in scripting, gdds, quest, etc.
 
-# https://baj.itch.io/speechr
+## https://baj.itch.io/drafft
 
 ---
 

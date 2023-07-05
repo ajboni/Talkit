@@ -764,6 +764,14 @@ function add(constructor)
 	};
 }
 
+function popUpToClear()
+{
+    if (confirm("Do you really want to clear the current dialog?"))
+	{
+        clear();
+    }
+}
+
 function clear()
 {
 	graph.clear();
@@ -954,7 +962,7 @@ $('#paper').contextmenu(
 		{ text: 'Save', alias: '2-1', action: save },
 		{ text: 'Load', alias: '2-2', action: load },
 		{ text: 'Import', id: 'import', alias: '2-3', action: importFile },
-		{ text: 'New', alias: '2-4', action: clear },
+		{ text: 'New', alias: '2-4', action: popUpToClear },
 		{ text: 'Export', id: 'export', alias: '2-5', action: exportFile },
 		{ text: 'Export game file', id: 'export-game', alias: '2-6', action: exportGameFile },
 	]

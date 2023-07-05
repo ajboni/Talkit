@@ -832,6 +832,7 @@ function handleFiles(files)
 $('#file').on('change', function()
 {
 	handleFiles(this.files);
+	$("#file").val('');
 });
 
 $('body').on('dragenter', function(e)

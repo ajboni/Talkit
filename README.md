@@ -1,4 +1,4 @@
-## Advertisment
+## Advertisement
 
 > Hello! I'm currently working on a similar but more powerful app which supports multiple dialogues with built in scripting, gdds, quest, etc.
 > https://baj.itch.io/drafft

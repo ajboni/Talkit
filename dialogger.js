@@ -167,19 +167,19 @@ joint.shapes.dialogue.BaseView = joint.shapes.devs.ModelView.extend(
 
 
 		// This is an example of reacting on the input change and storing the input data in the cell model.
-		this.$box.find('input.name').on('change', _.bind(function(evt)
+		this.$box.find('input.name').on('input', _.bind(function(evt)
 		{
 			this.model.set('name', $(evt.target).val());
 		}, this));
 
 	    // This is an example of reacting on the input change and storing the input data in the cell model.
-		this.$box.find('input.actor').on('change', _.bind(function (evt) {
+		this.$box.find('input.actor').on('input', _.bind(function (evt) {
 		    this.model.set('actor', $(evt.target).val());
 		}, this));
 
 
 	    // This is an example of reacting on the input change and storing the input data in the cell model. TEXTAREA
-		this.$box.find('textarea.name').on('change', _.bind(function (evt) {
+		this.$box.find('textarea.name').on('input', _.bind(function (evt) {
 		    this.model.set('name', $(evt.target).val());
 		}, this));
 
@@ -260,12 +260,12 @@ joint.shapes.dialogue.ChoiceView = joint.shapes.devs.ModelView.extend(
         this.$box.find('idd').on('mousedown click', function (evt) { evt.stopPropagation(); });
 
         // This is an example of reacting on the input change and storing the input data in the cell model.
-        this.$box.find('textarea.name').on('change', _.bind(function (evt) {
+        this.$box.find('textarea.name').on('input', _.bind(function (evt) {
             this.model.set('name', $(evt.target).val());
         }, this));
 
         // This is an example of reacting on the input change and storing the input data in the cell model.
-        this.$box.find('input.title').on('change', _.bind(function (evt) {
+        this.$box.find('input.title').on('input', _.bind(function (evt) {
             this.model.set('title', $(evt.target).val());
         }, this));
 
@@ -449,7 +449,7 @@ joint.shapes.dialogue.BranchView = joint.shapes.dialogue.BaseView.extend(
 			field.on('mousedown click', function(evt) { evt.stopPropagation(); });
 
 			// This is an example of reacting on the input change and storing the input data in the cell model.
-			field.on('change', _.bind(function(evt)
+			field.on('input', _.bind(function(evt)
 			{
 				var values = this.model.get('values').slice(0);
 				values[$(evt.target).attr('index')] = $(evt.target).val();
@@ -509,7 +509,7 @@ joint.shapes.dialogue.SetView = joint.shapes.dialogue.BaseView.extend(
 	initialize: function()
 	{
 		joint.shapes.dialogue.BaseView.prototype.initialize.apply(this, arguments);
-		this.$box.find('input.value').on('change', _.bind(function(evt)
+		this.$box.find('input.value').on('input', _.bind(function(evt)
 		{
 			this.model.set('value', $(evt.target).val());
 		}, this));
@@ -764,6 +764,14 @@ function add(constructor)
 	};
 }
 
+function popUpToClear()
+{
+    if (confirm("Do you really want to clear the current dialog?"))
+	{
+        clear();
+    }
+}
+
 function clear()
 {
 	graph.clear();
@@ -832,6 +840,7 @@ function handleFiles(files)
 $('#file').on('change', function()
 {
 	handleFiles(this.files);
+	$("#file").val('');
 });
 
 $('body').on('dragenter', function(e)
@@ -953,7 +962,7 @@ $('#paper').contextmenu(
 		{ text: 'Save', alias: '2-1', action: save },
 		{ text: 'Load', alias: '2-2', action: load },
 		{ text: 'Import', id: 'import', alias: '2-3', action: importFile },
-		{ text: 'New', alias: '2-4', action: clear },
+		{ text: 'New', alias: '2-4', action: popUpToClear },
 		{ text: 'Export', id: 'export', alias: '2-5', action: exportFile },
 		{ text: 'Export game file', id: 'export-game', alias: '2-6', action: exportGameFile },
 	]
